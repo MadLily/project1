@@ -10,7 +10,8 @@ Full List of Companies
 {% block content %}
 <table>
 {% for n in comp %}
-<!--   <div>{{n}}</div> -->
+{{comp}}
+<!--   <div>{{n}}</div> 
 <tr>
     <td>{{n.Company_Name}}</td>
     <td></td>
@@ -20,6 +21,7 @@ Full List of Companies
     <td></td>
     <td>{{n.Company_Description}}</td>
 </tr>
+-->
 {% endfor %}
 </table>
 {% endblock %}
