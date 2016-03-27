@@ -1,4 +1,31 @@
-<html>
+{% extends "layout.html" %}
+{% block title %}
+Lists of Cartoonists
+{% endblock %}
+{% block content %}
+
+<!-- we don't need the list anymore so -->
+<!-- <div>{{data}}</div>
+
+<div>
+  {% for n in data %}
+  <div>{{n}}</div>
+  {% endfor %}
+</div> -->
+
+<p><a href="/search">Search</a></p>
+<p><a href="/cartoonist_a">Alan Turing</a></p>
+
+<p><a href="/another">Lists of all Cartoonists</a></p>
+<p><a href="/companyindex">Lists of all Companies</a></p>
+<form method="POST" action="/add">
+<p>Name of new cartoonist: <input type="text" name="name"> <input type="submit" value="Add"></p>
+</form>
+
+
+{% endblock %}
+
+<!-- <html>
   <style>
     body{ 
       font-size: 15pt;
@@ -17,7 +44,8 @@
     {% endfor %}
   </div>
 
-<p><a href="/another">Go to the other page</a></p>
+  
+<p><a href="/another">Lists of all Cartoonists</a></p>
 
 <form method="POST" action="/add">
 <p>Name of new computer scientist: <input type="text" name="name"> <input type="submit" value="Add"></p>
@@ -26,4 +54,5 @@
 </body>
 
 
-</html>
+</html> -->
+

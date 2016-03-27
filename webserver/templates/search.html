@@ -1,0 +1,35 @@
+<!-- {% extends "layout.html" %}
+{% block title %}
+Search!
+{% endblock %}
+
+{% block content %}
+<body>
+    <h1>hhh</h1>
+    
+    <p> Search Result <p>
+    <div> -->
+<!--         {% for result in name %}
+        {{result}}
+        {% endfor %} -->
+<!--         {{name}}
+    </div>
+ {% endblock %} -->
+
+{% extends "layout.html" %}
+{% block title %}
+Book Search
+{% endblock %}
+
+{% block content %}
+<form method="POST" action="/search_comp">
+<p>Company Name: <input type="text" name="compname"> <input type="submit" value="search"></p>
+ <div>
+    {% for n in info %}
+    <div>{{n}}</div>
+    {% endfor %}
+  </div>
+</form>
+ {% endblock %} 
+
+

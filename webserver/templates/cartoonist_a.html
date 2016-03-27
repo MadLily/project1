@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block title %}
+{% for n in data %}
+{{n}}
+{% endfor %}
+{{names}}
+{% endblock %}
+
+{% block content %}
+Some famous Cartoonists
+{% for n in data %}
+<div>{{n}}</div>
+{% endfor %}
+{% endblock %}
