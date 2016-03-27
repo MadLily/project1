@@ -37,7 +37,7 @@ app = Flask(__name__, template_folder=tmpl_dir)
 #
 #     DATABASEURI = "postgresql://ewu2493:foobar@w4111db.eastus.cloudapp.azure.com/ewu2493"
 #
-DATABASEURI = "postgresql://jz2673:PLWRXY@w4111db.eastus.cloudapp.azure.com/jz2673"
+DATABASEURI = "postgresql://yb2356:GENXNR@w4111db.eastus.cloudapp.azure.com/yb2356"
 
 
 #
@@ -61,16 +61,25 @@ engine = create_engine(DATABASEURI)
 # 
 # The setup code should be deleted once you switch to using the Part 2 postgresql database
 #
-engine.execute("""DROP TABLE IF EXISTS test;""")
-engine.execute("""CREATE TABLE IF NOT EXISTS test (
-  id serial,
-  name text
-);""")
-engine.execute("""INSERT INTO test(name) VALUES ('grace hopper'), ('alan turing'), ('ada lovelace');""")
+
+# engine.execute("""DROP TABLE IF EXISTS test;""")
+# engine.execute("""CREATE TABLE IF NOT EXISTS test (
+#   id serial,
+#   name text
+# );""")
+# engine.execute("""DROP TABLE IF EXISTS company;""")
+# engine.execute("""CREATE TABLE IF NOT EXISTS company (
+#   company_name text,
+#   company_website text
+# );""")
+# engine.execute("""INSERT INTO test(name) VALUES ('grace hopper'), ('alan turing'), ('ada lovelace');""")
+# engine.execute("""INSERT INTO company(company_name) VALUES ('KyotoAnimation'), ('Pierrot'), ('Sunrise');""")
+# engine.execute("""INSERT INTO company(company_website) VALUES ('www.kyotoanimation.co.jp/'), ('http://en.pierrot.jp/'), ('http://www.sunrise-inc.co.jp/international/');""")
+# engine.execute("""INSERT INTO company(company_name,company_website) VALUES ('KyotoAnimation','http://www.kyotoanimation.co.jp/'),('Pierrot','http://en.pierrot.jp/'),('Sunrise','http://www.sunrise-inc.co.jp/international/');""")
+
 #
 # END SQLITE SETUP CODE
 #
-
 
 
 @app.before_request
@@ -133,11 +142,14 @@ def index():
   #
   # example of a database query
   #
-  cursor = g.conn.execute("SELECT name FROM test")
-  names = []
-  for result in cursor:
-    names.append(result['name'])  # can also be accessed using result[0]
-  cursor.close()
+  """
+  Hid the List on index
+  """
+  # cursor = g.conn.execute("SELECT name FROM test")
+  # names = []
+  # for result in cursor:
+  #   names.append(result['name'])  # can also be accessed using result[0]
+  # cursor.close()
 
   #
   # Flask uses Jinja templates, which is an extension to HTML where you can
@@ -165,14 +177,14 @@ def index():
   #     <div>{{n}}</div>
   #     {% endfor %}
   #
-  context = dict(data = names)
+  # context = dict(data = names)
 
 
   #
   # render_template looks in the templates/ folder for files.
   # for example, the below file reads template/index.html
   #
-  return render_template("index.html", **context)
+  return render_template("index.html")#, **context)
 
 #
 # This is an example of a different path.  You can see it at
@@ -184,15 +196,118 @@ def index():
 #
 @app.route('/another')
 def another():
-  return render_template("anotherfile.html")
+  cursor = g.conn.execute("SELECT Cartoonist_Name FROM Cartoonists")
+  names = []
+  for result in cursor:
+    names.append(result['Cartoonist_Name'])  # can also be accessed using result[0]
+  cursor.close()
+  context = dict(data = names)
+  return render_template("anotherfile.html", **context)
 
 
 # Example of adding new data to the database
-@app.route('/add', methods=['POST'])
-def add():
-  name = request.form['name']
-  g.conn.execute('INSERT INTO test VALUES (NULL, ?)', name)
-  return redirect('/')
+# @app.route('/add', methods=['POST'])
+# def add():
+#   name = request.form['name']
+#   g.conn.execute('INSERT INTO test VALUES (NULL, ?)', name)
+#   return redirect('/')
+"""
+Added cartoonist_a
+"""
+@app.route('/cartoonist_a')
+def cartoonist_a():
+  cursor = g.conn.execute("SELECT Cartoonist_Name FROM Cartoonists WHERE Cartoonist_Name = 'Masashi Kishimoto'")
+  names = []
+  for result in cursor:
+    names.append(result['Cartoonist_Name'])  # can also be accessed using result[0]
+  cursor.close()
+  context = dict(data = names)
+  return render_template("cartoonist_a.html", **context)
+"""
+Added companyindex
+"""
+@app.route('/companyindex')
+def companyindex():
+  cursor = g.conn.execute("SELECT * FROM Company")
+  companies = []
+  for row in cursor:
+    companies.append(row)  # can also be accessed using result[0]
+  cursor.close()
+  context = dict(comp = companies)
+  return render_template("companyindex.html", **context)
+
+# """
+# Add Search
+# """
+# compname = None
+# @app.route('/search_comp',methods=['POST'])
+# def search_comp():
+#  #   if loginName == "?":
+#   # return render_template('pleaseLogin.html')
+#    global compname   
+#    compname = request.form['compname']
+
+#    return redirect(url_for('search'))
+
+# #search feature
+# #website = None
+# @app.route('/search')
+# def search():
+#    temp = []
+#    info = []
+#    cursor = g.conn.execute("""SELECT * FROM company WHERE company_name = %s;""",(compname,))
+#    if cursor is None:
+#     context = 'The company is not in the database'
+#    else:
+#         # rec = cursor.fetchall()
+#    #global website
+#      for row in cursor: #rec:
+#   #     for x in range(0,5):
+#         temp.append(row)
+#    cursor.close()
+#    context = dict(info = temp) 
+#    # updateSearched()
+#    return render_template('search.html', **context)
+
+
+
+# """
+# Added search, 404
+# """
+# @app.route('/searchs', methods=['GET', 'POST'])
+# def search():
+#    try:
+#        input = request.form['search']
+#        input = '%' + input + '%'
+       
+   
+#        # cursor = g.conn.execute(text('SELECT name FROM test WHERE name LIKE :inpt'), inpt = input)
+#        cursor = g.conn.execute(text('SELECT name FROM test WHERE name LIKE :inpt'), inpt = input)
+
+#        list = []
+#        for result in cursor:
+#            list.append(result)
+#        cursor.close()
+
+#        context = dict(input = input, name = list)
+#    except:
+#        import traceback; traceback.print_exc()
+#    print request.args
+#    return render_template("search.html", **context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @app.route('/login')
