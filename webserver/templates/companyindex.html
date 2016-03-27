@@ -11,7 +11,8 @@ Full List of Companies
 <table>
 {% for n in comp %}
 <tr>
-<td>{{n.Company_Name}}</td>
+<td>{{n[0]}}</td>
+<td>{{n[1]}}</td>
 </tr>
 {% endfor %}
 </table>
