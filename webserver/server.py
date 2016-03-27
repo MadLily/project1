@@ -235,40 +235,28 @@ def companyindex():
   cursor.close()
   context = dict(comp = companies)
   return render_template("companyindex.html", **context)
+  
+"""
+Added Search
+"""
 
-# """
-# Add Search
-# """
-# compname = None
-# @app.route('/search_comp',methods=['POST'])
-# def search_comp():
-#  #   if loginName == "?":
-#   # return render_template('pleaseLogin.html')
-#    global compname   
-#    compname = request.form['compname']
-
-#    return redirect(url_for('search'))
-
-# #search feature
-# #website = None
-# @app.route('/search')
-# def search():
-#    temp = []
-#    info = []
-#    cursor = g.conn.execute("""SELECT * FROM company WHERE company_name = %s;""",(compname,))
-#    if cursor is None:
-#     context = 'The company is not in the database'
-#    else:
-#         # rec = cursor.fetchall()
-#    #global website
-#      for row in cursor: #rec:
-#   #     for x in range(0,5):
-#         temp.append(row)
-#    cursor.close()
-#    context = dict(info = temp) 
-#    # updateSearched()
-#    return render_template('search.html', **context)
-
+@app.route('/search')
+def search():
+   temp = []
+   info = []
+   cursor = g.conn.execute("""SELECT * FROM Company WHERE Company_Name = %s;""",(compname,))
+   if cursor is None:
+    context = 'The company is not in the database'
+   else:
+        # rec = cursor.fetchall()
+   #global website
+     for row in cursor: #rec:
+  #     for x in range(0,5):
+        temp.append(row)
+   cursor.close()
+   context = dict(info = temp) 
+   # updateSearched()
+   return render_template('search.html', **context)
 
 
 # """
