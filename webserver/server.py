@@ -231,7 +231,7 @@ def companyindex():
   cursor = g.conn.execute("SELECT * FROM Company")
   companies = []
   for result in cursor:
-    companies.append(result[0])  # can also be accessed using result[0]
+    companies.append(result)  # can also be accessed using result[0]
   cursor.close()
   context = dict(comp = companies)
   return render_template("companyindex.html", **context)
