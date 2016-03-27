@@ -8,11 +8,10 @@ Full List of Companies
 
 
 {% block content %}
-{{comp}}
 <table>
 {% for n in comp %}
 <tr>
-<td>{{n}}</td>
+<td>{{n.Company_Name}}</td>
 </tr>
 {% endfor %}
 </table>
