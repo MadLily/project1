@@ -9,9 +9,13 @@ Full List of Companies
 
 {% block content %}
 {{comp}}
+<table>
 {% for n in comp %}
-{{n}}
+<tr>
+<td>{{n}}</td>
+</tr>
 {% endfor %}
+</table>
 
 <!--
 <table>
