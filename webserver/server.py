@@ -284,7 +284,7 @@ def search():
 #    return render_template("search.html", **context)
 
 
-@app.route('/front2')
+@app.route('/compsearch')
 def frontpage():
   try: 
     cursor = g.conn.execute("SELECT atitle FROM animation")
@@ -295,7 +295,7 @@ def frontpage():
     ani_names.append(result['atitle'])  # can also be accessed using result[0]
   cursor.close()
   context = dict(animation = ani_names)
-  return render_template("front2.html", **context)
+  return render_template("compsearch.html", **context)
 
 
 
