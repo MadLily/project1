@@ -7,12 +7,11 @@ Search By Company
     {% for ani in animation %}
     <h3><div>{{ani}}</div></h3>
     {% endfor %}
-{% endblock %}
-
 <!-- <form method="POST" action="/animation"> -->
+<form>
 <p>See the details of an animation, type the name of company here:</p>
 <p> <input type="text" name="name"> <input type="submit" value="query"></p>
 </form>
+{% endblock %}
 
-</center>
-</html>
+
