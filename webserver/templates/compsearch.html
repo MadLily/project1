@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block title %}
+Search By Company
+{% endblock %}
+
+{% block content %}
+    {% for ani in animation %}
+    <h3><div>{{ani}}</div></h3>
+    {% endfor %}
+{% endblock %}
+
+<!-- <form method="POST" action="/animation"> -->
+<p>See the details of an animation, type the name of company here:</p>
+<p> <input type="text" name="name"> <input type="submit" value="query"></p>
+</form>
+
+</center>
+</html>
