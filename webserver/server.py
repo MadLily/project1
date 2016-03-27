@@ -284,8 +284,18 @@ def search():
 #    return render_template("search.html", **context)
 
 
-
-
+@app.route('/front2')
+def frontpage():
+  try: 
+    cursor = g.conn.execute("SELECT atitle FROM animation")
+  except Exception, e:
+    pass  
+  ani_names = []
+  for result in cursor:
+    ani_names.append(result['atitle'])  # can also be accessed using result[0]
+  cursor.close()
+  context = dict(animation = ani_names)
+  return render_template("front2.html", **context)
 
 
 
