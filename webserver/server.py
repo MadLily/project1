@@ -287,14 +287,14 @@ def search():
 @app.route('/compsearch')
 def frontpage():
   try: 
-    cursor = g.conn.execute("SELECT atitle FROM animation")
+    cursor = g.conn.execute("SELECT Company_Name FROM Company")
   except Exception, e:
     pass  
-  ani_names = []
+  comp_names = []
   for result in cursor:
-    ani_names.append(result['atitle'])  # can also be accessed using result[0]
+    comp_names.append(result[0])  # can also be accessed using result[0]
   cursor.close()
-  context = dict(animation = ani_names)
+  context = dict(animation = comp_names)
   return render_template("compsearch.html", **context)
 
 
