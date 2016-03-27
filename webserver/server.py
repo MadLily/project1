@@ -228,7 +228,7 @@ Added companyindex
 """
 @app.route('/companyindex')
 def companyindex():
-  cursor = g.conn.execute("SELECT Company_Name FROM Company")
+  cursor = g.conn.execute("SELECT * FROM Company")
   companies = []
   for result in cursor:
     companies.append(result[0])  # can also be accessed using result[0]
