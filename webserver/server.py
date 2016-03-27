@@ -228,10 +228,10 @@ Added companyindex
 """
 @app.route('/companyindex')
 def companyindex():
-  cursor = g.conn.execute("SELECT * FROM Company")
+  cursor = g.conn.execute("SELECT Company_Name FROM Company")
   companies = []
-  for row in cursor:
-    companies.append(row)  # can also be accessed using result[0]
+  for result in cursor:
+    companies.append(result[0])  # can also be accessed using result[0]
   cursor.close()
   context = dict(comp = companies)
   return render_template("companyindex.html", **context)
