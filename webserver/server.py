@@ -196,7 +196,7 @@ def index():
 #
 @app.route('/another')
 def another():
-  cursor = g.conn.execute("SELECT Cartoonist_Name FROM Cartoonists")
+  cursor = g.conn.execute("SELECT * FROM Cartoonists")
   names = []
   for result in cursor:
     names.append(result['Cartoonist_Name'])  # can also be accessed using result[0]
