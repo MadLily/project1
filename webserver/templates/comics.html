@@ -1,18 +1,16 @@
 {% extends "layout.html" %}
 {% block title %}
-Comic you are looking for...
+{{comNam}}
 {% endblock %}
 
 {% block content %}
-<h2>Comic you are looking for..</h2>
-<!-- <p>Comic Name: <div>{{comNa}}</div></p> -->
-<p>Comic Desc: <div>{{comDesc}}</div></p>
-<!-- <p>Cartoonist ID: <div>{{cartID}}</div></p> -->
-<p>Comic ISSN: <div>{{comIss}}</div></p>
-<!-- <p>Total seasons: <div>{{aniSeason}}</div></p>
-<p>Total episodes: <div>{{aniEpi}}</div></p>
-<p>Production Company: <div>{{aniComp}}</div></p>
-<p>Comic id: <div>{{cid}}</div></p> -->
+<h3>Comic you are looking for..</h3>
+<p>Comic Name: <div>{{comNam}}</div></p>
+<p>Comic Description: <div>{{comDesc}}</div></p>
+<p>Cartoonist: <div>{{carNam}}</div></p>
+<p>Cartoonist Birthday: <div>{{carBir}}</div></p>
+<p>Gender: <div>{{carSex}}</div></p>
+<p>Cartoonist Description: <div>{{carDesc}}</div></p>
 
 {% endblock %}
 
