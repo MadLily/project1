@@ -413,6 +413,48 @@ def comics(comID):
 #   context = dict(cart = cart_names)
 #   return render_template("cartsearch.html", **context)
 
+@app.route('/langsearch', methods=['GET','POST'])
+def langsearch():
+  error = None
+  try: 
+    cursor = g.conn.execute("SELECT DISTINCT language FROM Animation")
+  except Exception, e:
+    pass  
+  ani_lang = []
+  for result in cursor:
+    ani_lang.append(result[0])  # can also be accessed using result[0]
+  cursor.close()
+  #context = dict()
+
+  if request.method == 'POST':
+    query_lang_name = request.form['langsearch'] #From comisearch.html
+    if query_lang_name not in ani_lang:
+      error = "Language Not Listed."
+    else:
+      rec = g.conn.execute("SELECT DISTINCT lanuage FROM Animation WHERE lanuage= %s",(query_lang_name,))
+      # rec = g.conn.execute("SELECT * FROM Comic_Draw_Publish c, Magazine m, Cartoonists d WHERE c.Comic_Name = %s,(query_comi_name,) AND c.Cartoonist_ID = d.Cartoonist_ID AND c.ISSN = m.ISSN")
+      for res in rec:
+        langNam=res['language']
+        # comDesc = res['comic_description']#[2]
+        # cartID = res['cartoonist_id']#[3]
+        # comIss = res['issn']#[4]
+        # aniDate = res['released_date']
+        # aniComp = res['company_name']
+        # aniCid = res['comic_id']
+      return redirect(url_for('language',langNam=langNam))
+      # return render_template("comics.html", comNam = comNam, comDesc = comDesc, cartID = cartID,
+       # comIss = comIss) #, aniEpi = aniEpi,  aniComp = aniComp, cid = aniCid)
+  return render_template("langsearch.html", ani_lang = ani_lang, error=error)
+
+@app.route('/language/<langNam>', methods=['GET','POST'])
+def comics(langNam):
+  #global usrName
+  rec = g.conn.execute("SELECT * FROM Animation A WHERE A.language = %s",(langNam,))
+  # rec = g.conn.execute("SELECT * FROM Comic_Draw_Publish C, Cartoonists R, Magazine M WHERE C.comic_id = %s AND C.Cartoonist_ID = R.Cartoonist_ID AND M.ISSN = C.ISSN",(comID,))
+  #rec = g.conn.execute("SELECT * FROM Comic_Draw_Publish C, Cartoonists R WHERE C.comic_id = %s AND C.Cartoonist_ID = R.Cartoonist_ID",(comID,))
+  for res in rec:
+    aniName = res['atitle']
+  return render_template("language.html",aniName=aniName)
 
 
 
