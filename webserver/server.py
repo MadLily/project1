@@ -181,11 +181,28 @@ def index():
 
 
 
+# """
+# By Company
+# """
+# @app.route('/compsearch')
+# def compsearch():
+#   try: 
+#     cursor = g.conn.execute("SELECT Company_Name FROM Company")
+#   except Exception, e:
+#     pass  
+#   comp_names = []
+#   for result in cursor:
+#     comp_names.append(result[0])  # can also be accessed using result[0]
+#   cursor.close()
+#   context = dict(animation = comp_names)
+#   return render_template("compsearch.html", **context)
+
 """
 By Company
 """
 @app.route('/compsearch')
 def compsearch():
+  error = None
   try: 
     cursor = g.conn.execute("SELECT Company_Name FROM Company")
   except Exception, e:
@@ -194,11 +211,40 @@ def compsearch():
   for result in cursor:
     comp_names.append(result[0])  # can also be accessed using result[0]
   cursor.close()
-  context = dict(animation = comp_names)
-  return render_template("compsearch.html", **context)
+  #context = dict(animation = comp_names)
+  if request.method == "POST":
+    query_comp_name = request.form['comp_name']
+    if query_comp_name not in comp_names:
+      error = "The company your searched for is not in the database"
+    else:
+      rec = g.conn.execute("SELECT Company_Name FROM Company WHERE Company_Name = %s",(query_comi_name,))
+      # rec = g.conn.execute("SELECT * FROM Comic_Draw_Publish c, Magazine m, Cartoonists d WHERE c.Comic_Name = %s,(query_comi_name,) AND c.Cartoonist_ID = d.Cartoonist_ID AND c.ISSN = m.ISSN")
+      for res in rec:
+        compNam=res['company_name']
+      return redirect(url_for('company',compNam=compNam))
 
-  
-""""""
+    return render_template("compsearch.html", comp_names=comp_names, error=error)
+
+
+@app.route('/company/<compNam>')
+def company(compNam):
+  #global usrName
+  rec = g.conn.execute("SELECT * FROM Company C, Animation A WHERE C.company_name = %s AND C.company_name = A.company_name",(compNam,))
+  for res in rec:
+    compName = res['company_name']
+    compWeb = res['company_website']
+    compCou = res['company_country']
+    compDesc = res['company_description']
+    compAni = res['atitle']
+    # carSex = res['cartoonist_gender']
+    # carDesc = res['cartoonist_description']
+    # magNam = res['magazine_name']
+    # magLang = res['magazine_language']
+    # magDesc = res['magazine_description']
+  return render_template("company.html",compName=compNames,compWeb=compWeb,compCou=compCou,compDesc=compDesc,compAni =compAni)
+#  return render_template("comics.html",comID=comID,comDesc=comDesc,comIss=comIss,comNam=comNam,carNam=carNam,carBir=carBir,carSex=carSex,carDesc=carDesc)
+
+
 # """
 # By Company
 # """
