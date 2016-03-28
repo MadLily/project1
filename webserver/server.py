@@ -222,8 +222,7 @@ def compsearch():
       for res in rec:
         compNam=res['company_name']
       return redirect(url_for('company',compNam=compNam))
-
-    return render_template("compsearch.html", comp_names=comp_names, error=error)
+  return render_template("compsearch.html", comp_names=comp_names, error=error)
 
 
 @app.route('/company/<compNam>')
