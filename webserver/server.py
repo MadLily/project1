@@ -283,6 +283,24 @@ def search():
 #    print request.args
 #    return render_template("search.html", **context)
 
+
+# """
+# By Company
+# """
+# @app.route('/compsearch')
+# def compsearch():
+#   try: 
+#     cursor = g.conn.execute("SELECT Company_Name FROM Company")
+#   except Exception, e:
+#     pass  
+#   comp_names = []
+#   for result in cursor:
+#     comp_names.append(result[0])  # can also be accessed using result[0]
+#   cursor.close()
+#   context = dict(animation = comp_names)
+#   return render_template("compsearch.html", **context)
+  
+""""""
 """
 By Company
 """
@@ -296,8 +314,29 @@ def compsearch():
   for result in cursor:
     comp_names.append(result[0])  # can also be accessed using result[0]
   cursor.close()
-  context = dict(animation = comp_names)
-  return render_template("compsearch.html", **context)
+
+  if request.method == 'POST':
+    query_comp_name = request.form['comp_name'] #From comisearch.html
+    if query_comp_name not in comp_names:
+      error = "Invalid company name."
+    else:
+      rec = g.conn.execute("SELECT * FROM Company Y WHERE Y.Company_Name = %s",(query_comp_name,))
+      
+      for res in rec:
+        compNam=res['company_name']
+        compWeb = res['company_website']
+        compCou = res['company_country']
+        compDesc = res['company_description']
+        # aniDate = res['released_date']
+        # aniComp = res['company_name']
+        # aniCid = res['comic_id']
+      return render_template("company.html", compNam = compNam, compWeb = compWeb, compCou = compCou,
+       compDesc = compDesc) #, aniEpi = aniEpi,  aniComp = aniComp, cid = aniCid)
+  return render_template("compsearch.html", comp_names = comp_names, error=error)
+  
+  
+  
+  
 """
 By Comic Name
 """
