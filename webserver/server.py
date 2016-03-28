@@ -269,7 +269,8 @@ def comisearch():
     if query_comi_name not in comi_names:
       error = "Invalid comic name."
     else:
-      rec = g.conn.execute("SELECT Comic_ID FROM Comic_Draw_Publish C WHERE C.Comic_Name = %s",(query_comi_name,))
+      rec = g.conn.execute("SELECT * FROM Comic_Draw_Publish C, Cartoonists R, Magazine M WHERE C.comic_id = %s AND C.Cartoonist_ID = R.Cartoonist_ID AND M.ISSN = C.ISSN",(comID,))
+      # rec = g.conn.execute("SELECT Comic_ID FROM Comic_Draw_Publish C WHERE C.Comic_Name = %s",(query_comi_name,))
       # rec = g.conn.execute("SELECT * FROM Comic_Draw_Publish c, Magazine m, Cartoonists d WHERE c.Comic_Name = %s,(query_comi_name,) AND c.Cartoonist_ID = d.Cartoonist_ID AND c.ISSN = m.ISSN")
       for res in rec:
         comID=res['comic_id']
