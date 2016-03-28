@@ -316,11 +316,11 @@ def compsearch():
   cursor.close()
 
   if request.method == 'POST':
-    query_comp_name = request.form['comp_name'] #From comisearch.html
+    query_comp_name = request.form['comp_name']
     if query_comp_name not in comp_names:
       error = "Invalid company name."
     else:
-      rec = g.conn.execute("SELECT * FROM Company Y WHERE Y.Company_Name = %s",(query_comp_name,))
+      rec = g.conn.execute("SELECT * FROM Company WHERE Company_Name = %s",(query_comp_name,))
       
       for res in rec:
         compNam=res['company_name']
