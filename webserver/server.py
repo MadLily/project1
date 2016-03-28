@@ -287,7 +287,7 @@ def search():
 By Company
 """
 @app.route('/compsearch')
-def frontpage():
+def compsearch():
   try: 
     cursor = g.conn.execute("SELECT Company_Name FROM Company")
   except Exception, e:
@@ -302,7 +302,7 @@ def frontpage():
 By Comic
 """
 @app.route('/comisearch')
-def frontpage():
+def comisearch():
   try: 
     cursor = g.conn.execute("SELECT Comic_Name FROM Comic_Draw_Publish")
   except Exception, e:
