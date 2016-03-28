@@ -8,7 +8,13 @@ Company you are looking for...
 <p>Company Website: <div>{{compWeb}}</div></p>
 <p>Country <div>{{compCou}}</div></p>
 <p>Company Description: <div>{{compDesc}}</div></p>
-<p>Productions <div>{{compAni}}</div></p>
+<p>Productions 
+<div>
+  {% for ani in compAni %}
+  {{ani}}
+  {% endfor %}
+</div>
+</p>
 <!-- <p>Total seasons: <div>{{aniSeason}}</div></p>
 <p>Total episodes: <div>{{aniEpi}}</div></p>
 <p>Production Company: <div>{{aniComp}}</div></p>
