@@ -6,9 +6,11 @@ Browse By Language
 {% block content %}
 <table>
     <th>Available Languages</th>
+    <tr>
     {% for lang in ani_lang %}
     <td>{{lang}}</td>
     {% endfor %}
+    </tr>
 </table>
 <!-- <form method="POST" action="/animation"> -->
 <form method ="POST" action="/langsearch">
