@@ -318,6 +318,7 @@ By Comic Name
 
 @app.route('/comisearch', methods=['GET','POST'])
 def comisearch():
+  error = None
   try: 
     cursor = g.conn.execute("SELECT Comic_Name FROM Comic_Draw_Publish")
   except Exception, e:
