@@ -287,7 +287,7 @@ def comisearch():
 @app.route('/comics/<comID>', methods=['GET','POST'])
 def comics(comID):
   #global usrName
-  rec = g.conn.execute("SELECT * FROM Comic_Draw_Publish C, Cartoonists R, Magazine M, Animation A WHERE C.comic_id = A.comic_id = %s AND C.Cartoonist_ID = R.Cartoonist_ID AND M.ISSN = C.ISSN",(comID,))
+  rec = g.conn.execute("SELECT * FROM Comic_Draw_Publish C, Cartoonists R, Magazine M, Animation A WHERE C.comic_id = %s AND C.comic_id = A.comic_id AND C.Cartoonist_ID = R.Cartoonist_ID AND M.ISSN = C.ISSN",(comID,))
   # rec = g.conn.execute("SELECT * FROM Comic_Draw_Publish C, Cartoonists R, Magazine M WHERE C.comic_id = %s AND C.Cartoonist_ID = R.Cartoonist_ID AND M.ISSN = C.ISSN",(comID,))
   #rec = g.conn.execute("SELECT * FROM Comic_Draw_Publish C, Cartoonists R WHERE C.comic_id = %s AND C.Cartoonist_ID = R.Cartoonist_ID",(comID,))
   for res in rec:
