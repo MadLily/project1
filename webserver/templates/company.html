@@ -15,19 +15,22 @@ Company you are looking for...
     <td>{{compCou}}</td>
   </tr>
   <tr>
-    <th colspan ="4">Company Descriptiom</th>
+    <th colspan ="4">Company Description</th>
   </tr>
   <tr>
     <td colspan ="4">{{compDesc}}</td>
   </tr>
-<!--<p>Company Description: <div>{{compDesc}}</div></p>-->
-<!--<p>Productions -->
-<!--<div>-->
-<!--  {% for ani in compAni %}-->
-<!--  <div>{{ani}}</div>-->
-<!--  {% endfor %}-->
-<!--</div>-->
-<!--</p>-->
+  <tr>
+    <th colspan ="4">Productions</th>
+  </tr>
+  <tr>
+    <td colspan ="4">{{compDesc}}</td>
+  </tr>
+  <tr>
+  {% for ani in compAni %}
+  <td colspan ="4">{{ani}}</td>
+  {% endfor %}
+  </tr>
   
 </table>
 
