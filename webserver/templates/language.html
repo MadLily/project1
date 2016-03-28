@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block title %}
+Language you are looking for...
+{% endblock %}
+
+{% block content %}
+<p>Language: <div>{{langName}}</div></p>
+<p>Animations: <div>{{aniName}}</div></p>
+
+<p>Language:
+{% for lang in langName %}
+<h4><div>{{lang}}</div></h4>
+{% endfor %}
+<p>
+
+<p>Animations
+{% for lang in langName %}
+<h4><div>{{lang}}</div></h4>
+{% endfor %}
+</p>
+{% endblock %}
+
