@@ -251,7 +251,6 @@ By Comic Name
 #   context = dict(comi = comi_names)
 #   return render_template("comisearch.html", **context)
 
-
 @app.route('/comisearch', methods=['GET','POST'])
 def comisearch():
   error = None
@@ -270,19 +269,66 @@ def comisearch():
     if query_comi_name not in comi_names:
       error = "Invalid comic name."
     else:
-      rec = g.conn.execute("SELECT * FROM Comic_Draw_Publish C WHERE C.Comic_Name = %s",(query_comi_name,))
+      rec = g.conn.execute("SELECT Comic_ID FROM Comic_Draw_Publish C WHERE C.Comic_Name = %s",(query_comi_name,))
       # rec = g.conn.execute("SELECT * FROM Comic_Draw_Publish c, Magazine m, Cartoonists d WHERE c.Comic_Name = %s,(query_comi_name,) AND c.Cartoonist_ID = d.Cartoonist_ID AND c.ISSN = m.ISSN")
       for res in rec:
-        comNam=res['comic_name']#[1]#
-        comDesc = res['comic_description']#[2]
-        cartID = res['cartoonist_id']#[3]
-        comIss = res['issn']#[4]
+        comID=res['comic_id']
+        # comDesc = res['comic_description']#[2]
+        # cartID = res['cartoonist_id']#[3]
+        # comIss = res['issn']#[4]
         # aniDate = res['released_date']
         # aniComp = res['company_name']
         # aniCid = res['comic_id']
-      return render_template("comics.html", comNam = comNam, comDesc = comDesc, cartID = cartID,
-       comIss = comIss) #, aniEpi = aniEpi,  aniComp = aniComp, cid = aniCid)
+      return redirect(url_for('comics',comID=comID))
+      # return render_template("comics.html", comNam = comNam, comDesc = comDesc, cartID = cartID,
+       # comIss = comIss) #, aniEpi = aniEpi,  aniComp = aniComp, cid = aniCid)
   return render_template("comisearch.html", comi = comi_names, error=error)
+
+@app.route('/comics/<comID>', methods=['GET','POST'])
+def comics(comID):
+  #global usrName
+  rec = g.conn.execute("SELECT * FROM Comic_Draw_Publish C WHERE C.comic_id = %s",(comID,))
+  for res in rec:
+    comDesc = res['comic_description']
+    comIss = res['issn']
+  return render_template("comics.html",comID=comID,comDesc=comDesc,comIss=comIss)
+
+
+# @app.route('/comisearch', methods=['GET','POST'])
+# def comisearch():
+#   error = None
+#   try: 
+#     cursor = g.conn.execute("SELECT Comic_Name FROM Comic_Draw_Publish")
+#   except Exception, e:
+#     pass  
+#   comi_names = []
+#   for result in cursor:
+#     comi_names.append(result[0])  # can also be accessed using result[0]
+#   cursor.close()
+#   #context = dict()
+
+#   if request.method == 'POST':
+#     query_comi_name = request.form['comic_name'] #From comisearch.html
+#     if query_comi_name not in comi_names:
+#       error = "Invalid comic name."
+#     else:
+#       rec = g.conn.execute("SELECT * FROM Comic_Draw_Publish C WHERE C.Comic_Name = %s",(query_comi_name,))
+#       # rec = g.conn.execute("SELECT * FROM Comic_Draw_Publish c, Magazine m, Cartoonists d WHERE c.Comic_Name = %s,(query_comi_name,) AND c.Cartoonist_ID = d.Cartoonist_ID AND c.ISSN = m.ISSN")
+#       for res in rec:
+#         comNam=res['comic_name']#[1]#
+#         comDesc = res['comic_description']#[2]
+#         cartID = res['cartoonist_id']#[3]
+#         comIss = res['issn']#[4]
+#         # aniDate = res['released_date']
+#         # aniComp = res['company_name']
+#         # aniCid = res['comic_id']
+#       return render_template("comics.html", comNam = comNam, comDesc = comDesc, cartID = cartID,
+#        comIss = comIss) #, aniEpi = aniEpi,  aniComp = aniComp, cid = aniCid)
+#   return render_template("comisearch.html", comi = comi_names, error=error)
+
+
+
+
 # """
 # By Cartoonist
 # """
