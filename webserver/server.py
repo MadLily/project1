@@ -228,13 +228,17 @@ def compsearch():
 @app.route('/company/<compNam>')
 def company(compNam):
   #global usrName
-  rec = g.conn.execute("SELECT * FROM Company C, Animation A WHERE C.company_name = %s AND C.company_name = A.company_name",(compNam,))
+  rec = g.conn.execute("SELECT * FROM Company C WHERE C.company_name = %s AND C.company_name = A.company_name",(compNam,))
   for res in rec:
     compName = res['company_name']
     compWeb = res['company_website']
     compCou = res['company_country']
     compDesc = res['company_description']
-    compAni = res['atitle']
+  an = g.conn.execute("SELECT * FROM Company C, Animation A WHERE C.company_name = %s AND C.company_name = A.company_name",(compNam,))
+  compAni =[]
+  for ani in an:
+      compAni.append(ani['atitle'])
+    # compAni = res['atitle']
     # carSex = res['cartoonist_gender']
     # carDesc = res['cartoonist_description']
     # magNam = res['magazine_name']
