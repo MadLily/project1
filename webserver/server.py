@@ -301,7 +301,6 @@ def compsearch():
 """
 By Comic Name
 """
-
 # @app.route('/comisearch')
 # def comisearch():
 #   try: 
@@ -346,7 +345,6 @@ def comisearch():
         # aniCid = res['comic_id']
       return render_template("comics.html", comNam = comNam, comDesc = comDesc, cartID = cartID,
        comIss = comIss) #, aniEpi = aniEpi,  aniComp = aniComp, cid = aniCid)
-      
   return render_template("comisearch.html", comi = comi_names, error=error)
 # """
 # By Cartoonist
