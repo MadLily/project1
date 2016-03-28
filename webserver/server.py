@@ -228,7 +228,7 @@ def compsearch():
 @app.route('/company/<compNam>')
 def company(compNam):
   #global usrName
-  rec = g.conn.execute("SELECT * FROM Company C WHERE C.company_name = %s AND C.company_name = A.company_name",(compNam,))
+  rec = g.conn.execute("SELECT * FROM Company C WHERE C.company_name = %s",(compNam,))
   for res in rec:
     compName = res['company_name']
     compWeb = res['company_website']
