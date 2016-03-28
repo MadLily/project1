@@ -13,4 +13,9 @@ Search By Comic Name
 <!--MUST CHANGE NAME! -->
 <p> <input type="text" name="comic_name"> <input type="submit" value="query"></p>
 </form>
+
+{% if error %}
+<p class="error"><strong>Error:</strong> {{ error }}
+{% endif %}
+
 {% endblock %}
