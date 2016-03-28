@@ -5,16 +5,60 @@
 
 {% block content %}
 <h3>Comic you are looking for..</h3>
-<p>Comic Name: <div>{{comNam}}</div></p>
-<p>Relevant Animation <div>{{aniName}}</div></p>
-<p>Comic Description: <div>{{comDesc}}</div></p>
-<p>Cartoonist: <div>{{carNam}}</div></p>
-<p>Cartoonist Birthday: <div>{{carBir}}</div></p>
-<p>Gender: <div>{{carSex}}</div></p>
-<p>Cartoonist Description: <div>{{carDesc}}</div></p>
-<p>Magazine Name: <div>{{magNam}}</div></p>
-<p>Magazine Language: <div>{{magLang}}</div></p>
-<p>Magazine Description: <div>{{magDesc}}</div></p>
+<table>
+  <tr>
+    <th>Comic Name</th>
+    <th>Relevant Animation</th>
+  </tr>
+  <tr>
+    <td>{{comNam}</td>
+    <td>{{aniName}}</td>
+  </tr>
+  <tr>
+  <th colspan="2">
+    Comic Description
+  </th>
+  </tr>
+  <tr colspan="2">
+    {{comDesc}}
+  </tr>
+</table>
+
+<table>
+  <tr>
+   <th>Cartoonist</th>
+   <th>Gender</th>
+   <th>Cartoonist Birthday</th>
+  </tr>
+  <tr>
+    <td>{{carNam}</td>
+    <td>{{carSex}}</td>
+    <td>{{carBir}}</td>
+  </tr>
+  <tr>
+    <th colspan="3">Cartoonist Description</th>
+  </tr>
+  <tr>
+    {{carDesc}}
+  </tr>
+</table>
+
+<table>
+  <tr>
+   <th>Magazine Name</th>
+   <th>Magazine Language</th>
+  </tr>
+  <tr>
+    <td>{{magNam}}</td>
+    <td>{{magLang}}</td>
+  </tr>
+  <tr>
+    <th colspan="3">Magazine Description</th>
+  </tr>
+  <tr>
+    {{magDesc}}
+  </tr>
+</table>
 
 {% endblock %}
 
