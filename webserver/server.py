@@ -447,7 +447,7 @@ def langsearch():
   return render_template("langsearch.html", ani_lang = ani_lang, error=error)
 
 @app.route('/language/<langNam>', methods=['GET','POST'])
-def comics(langNam):
+def language(langNam):
   #global usrName
   rec = g.conn.execute("SELECT * FROM Animation A WHERE A.language = %s",(langNam,))
   # rec = g.conn.execute("SELECT * FROM Comic_Draw_Publish C, Cartoonists R, Magazine M WHERE C.comic_id = %s AND C.Cartoonist_ID = R.Cartoonist_ID AND M.ISSN = C.ISSN",(comID,))
