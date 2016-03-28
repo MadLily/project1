@@ -1,12 +1,11 @@
 {% extends "layout.html" %}
 {% block title %}
-Language you are looking for...
+Animations in {{langNam}}
 {% endblock %}
 
 {% block content %}
-<p>Language: <div>{{langNam}}</div></p>
+<p>We have the following animations in {{langNam}} !</p>
 
-<p>Animations</p>
 <table>
 <th>Animations In {{langNam}}</th>
 {% for ani in aniName %}
