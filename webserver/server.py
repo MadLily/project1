@@ -240,7 +240,7 @@ def company(compNam):
     # magNam = res['magazine_name']
     # magLang = res['magazine_language']
     # magDesc = res['magazine_description']
-  return render_template("company.html",compName=compNames,compWeb=compWeb,compCou=compCou,compDesc=compDesc,compAni =compAni)
+  return render_template("company.html",compName=compName,compWeb=compWeb,compCou=compCou,compDesc=compDesc,compAni =compAni)
 #  return render_template("comics.html",comID=comID,comDesc=comDesc,comIss=comIss,comNam=comNam,carNam=carNam,carBir=carBir,carSex=carSex,carDesc=carDesc)
 
 
