@@ -297,7 +297,11 @@ def comics(comID):
     carBir = res['date_of_birth']
     carSex = res['cartoonist_gender']
     carDesc = res['cartoonist_description']
-  return render_template("comics.html",comID=comID,comDesc=comDesc,comIss=comIss,comNam=comNam,carNam=carNam,carBir=carBir,carSex=carSex,carDesc=carDesc)
+    magNam = res['magazine_name']
+    magLang = res['magazine_language']
+    magDesc = res['magazine_description']
+  return render_template("comics.html",comID=comID,comDesc=comDesc,comIss=comIss,comNam=comNam,carNam=carNam,carBir=carBir,carSex=carSex,carDesc=carDesc,magNam=magNam,magLang=magLang,magDesc=magDesc)
+#  return render_template("comics.html",comID=comID,comDesc=comDesc,comIss=comIss,comNam=comNam,carNam=carNam,carBir=carBir,carSex=carSex,carDesc=carDesc)
 
 
 # @app.route('/comics/<comID>', methods=['GET','POST'])
