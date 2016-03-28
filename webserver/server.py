@@ -431,7 +431,7 @@ def langsearch():
     if query_lang_name not in ani_lang:
       error = "Language Not Listed."
     else:
-      rec = g.conn.execute("SELECT DISTINCT lanuage FROM Animation WHERE lanuage= %s",(query_lang_name,))
+      rec = g.conn.execute("SELECT DISTINCT language FROM Animation WHERE lanuage= %s",(query_lang_name,))
       # rec = g.conn.execute("SELECT * FROM Comic_Draw_Publish c, Magazine m, Cartoonists d WHERE c.Comic_Name = %s,(query_comi_name,) AND c.Cartoonist_ID = d.Cartoonist_ID AND c.ISSN = m.ISSN")
       for res in rec:
         langNam=res['language']
