@@ -7,16 +7,15 @@ Language you are looking for...
 <p>Language: <div>{{langName}}</div></p>
 <p>Animations: <div>{{aniName}}</div></p>
 
-<p>Language:
+<p>Language:</p>
 {% for lang in langName %}
-<h4><div>{{lang}}</div></h4>
+{{lang}}
 {% endfor %}
-<p>
 
-<p>Animations
-{% for lang in langName %}
-<h4><div>{{lang}}</div></h4>
+<p>Animations</p>
+{% for ani in aniName %}
+{{ani}}
 {% endfor %}
-</p>
+
 {% endblock %}
 
