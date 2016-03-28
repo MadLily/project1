@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block title %}
+Search By Comic Name
+{% endblock %}
+
+{% block content %}
+    {% for com in comi %}
+    <h4><div>{{com}}</div></h4>
+    {% endfor %}
+<!-- <form method="POST" action="/animation"> -->
+<form>
+<p>See the details of an animation, type the name of company here:</p>
+<!--MUST CHANGE NAME! -->
+<p> <input type="text" name="name"> <input type="submit" value="query"></p>
+</form>
+{% endblock %}
