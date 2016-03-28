@@ -4,14 +4,12 @@ Search By Company
 {% endblock %}
 
 {% block content %}
-    {% for ani in animation %}
-    <h4><div>{{ani}}</div></h4>
+    {% for comp in comp_names %}
+    <h4><div>{{comp}}</div></h4>
     {% endfor %}
 <!-- <form method="POST" action="/animation"> -->
-<form>
+<form method ="POST" action="/compsearch">
 <p>See the details of an animation, type the name of company here:</p>
-<p> <input type="text" name="name"> <input type="submit" value="query"></p>
+<p> <input type="text" name="comp_name"> <input type="submit" value="query"></p>
 </form>
 {% endblock %}
-
-
