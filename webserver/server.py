@@ -452,10 +452,10 @@ def language(langNam):
   rec = g.conn.execute("SELECT * FROM Animation A WHERE A.language = %s",(langNam,))
   # rec = g.conn.execute("SELECT * FROM Comic_Draw_Publish C, Cartoonists R, Magazine M WHERE C.comic_id = %s AND C.Cartoonist_ID = R.Cartoonist_ID AND M.ISSN = C.ISSN",(comID,))
   #rec = g.conn.execute("SELECT * FROM Comic_Draw_Publish C, Cartoonists R WHERE C.comic_id = %s AND C.Cartoonist_ID = R.Cartoonist_ID",(comID,))
+  aniName = []
   for res in rec:
-    aniName = res['atitle']
+    aniName.append(res['atitle'])
   return render_template("language.html",aniName=aniName)
-
 
 
 
