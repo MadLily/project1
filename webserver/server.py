@@ -302,7 +302,7 @@ def comics(comID):
     magLang = res['magazine_language']
     magDesc = res['magazine_description']
     aniName = res['atitle']
-  return render_template("comics.html",comID=comID,comDesc=comDesc,comIss=comIss,comNam=comNam,carNam=carNam,carBir=carBir,carSex=carSex,carDesc=carDesc,magNam=magNam,magLang=magLang,magDesc=magDesc)
+  return render_template("comics.html",comID=comID,comDesc=comDesc,comIss=comIss,comNam=comNam,carNam=carNam,carBir=carBir,carSex=carSex,carDesc=carDesc,magNam=magNam,magLang=magLang,magDesc=magDesc,aniName=aniName)
 #  return render_template("comics.html",comID=comID,comDesc=comDesc,comIss=comIss,comNam=comNam,carNam=carNam,carBir=carBir,carSex=carSex,carDesc=carDesc)
 
 
