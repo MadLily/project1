@@ -299,36 +299,36 @@ def frontpage():
   context = dict(animation = comp_names)
   return render_template("compsearch.html", **context)
 """
-By Magazine
+By Comic
 """
-@app.route('/magasearch')
+@app.route('/comisearch')
 def frontpage():
   try: 
-    cursor = g.conn.execute("SELECT Magazine_Name FROM Magazine")
+    cursor = g.conn.execute("SELECT Comic_Name FROM Comic_Draw_Publish")
   except Exception, e:
     pass  
-  maga_names = []
+  comi_names = []
   for result in cursor:
-    comp_names.append(result[0])  # can also be accessed using result[0]
+    comi_names.append(result[0])  # can also be accessed using result[0]
   cursor.close()
-  context = dict(maga = maga_names)
-  return render_template("magasearch.html", **context)
+  context = dict(comi = comi_names)
+  return render_template("comisearch.html", **context)
 
-"""
-By Cartoonist
-"""
-@app.route('/cartsearch')
-def frontpage():
-  try: 
-    cursor = g.conn.execute("SELECT Magazine_Name FROM Cartoonists")
-  except Exception, e:
-    pass  
-  cart_names = []
-  for result in cursor:
-    cart_names.append(result[0])  # can also be accessed using result[0]
-  cursor.close()
-  context = dict(cart = cart_names)
-  return render_template("magasearch.html", **context)
+# """
+# By Cartoonist
+# """
+# @app.route('/cartsearch')
+# def frontpage():
+#   try: 
+#     cursor = g.conn.execute("SELECT Cartoonist_Name FROM Cartoonists")
+#   except Exception, e:
+#     pass  
+#   cart_names = []
+#   for result in cursor:
+#     cart_names.append(result[0])  # can also be accessed using result[0]
+#   cursor.close()
+#   context = dict(cart = cart_names)
+#   return render_template("cartsearch.html", **context)
 
 
 
