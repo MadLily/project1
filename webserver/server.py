@@ -288,11 +288,26 @@ def comisearch():
 def comics(comID):
   #global usrName
   rec = g.conn.execute("SELECT * FROM Comic_Draw_Publish C, Cartoonists R WHERE C.comic_id = %s AND C.Cartoonist_ID = R.Cartoonist_ID",(comID,))
-  # rec = g.conn.execute("SELECT * FROM Comic_Draw_Publish C WHERE C.comic_id = %s",(comID,))
   for res in rec:
+    comNam = res['comic_name']
     comDesc = res['comic_description']
     comIss = res['issn']
-  return render_template("comics.html",comID=comID,comDesc=comDesc,comIss=comIss)
+    carNam = res['Cartoonist_Name']
+    carBir = res['Date_of_Birth']
+    carSex = res['Cartoonist_Gender']
+    carDesc = res['Cartoonist_Description']
+  return render_template("comics.html",comID=comID,comDesc=comDesc,comIss=comIss,comNam=comNam,carNam=carNam,carBir=carBir,carSex=carSex,carDesc=carDesc)
+
+
+# @app.route('/comics/<comID>', methods=['GET','POST'])
+# def comics(comID):
+#   #global usrName
+#   rec = g.conn.execute("SELECT * FROM Comic_Draw_Publish C, Cartoonists R WHERE C.comic_id = %s AND C.Cartoonist_ID = R.Cartoonist_ID",(comID,))
+#   # rec = g.conn.execute("SELECT * FROM Comic_Draw_Publish C WHERE C.comic_id = %s",(comID,))
+#   for res in rec:
+#     comDesc = res['comic_description']
+#     comIss = res['issn']
+#   return render_template("comics.html",comID=comID,comDesc=comDesc,comIss=comIss)
 
 
 # @app.route('/comisearch', methods=['GET','POST'])
