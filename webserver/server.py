@@ -200,7 +200,7 @@ def index():
 """
 By Company
 """
-@app.route('/compsearch')
+@app.route('/compsearch', methods=['GET','POST'])
 def compsearch():
   error = None
   try: 
