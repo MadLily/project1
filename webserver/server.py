@@ -59,28 +59,6 @@ engine = create_engine(DATABASEURI)
 #     .tables               -- will list the tables in the database
 #     .schema <tablename>   -- print CREATE TABLE statement for table
 # 
-# The setup code should be deleted once you switch to using the Part 2 postgresql database
-#
-
-# engine.execute("""DROP TABLE IF EXISTS test;""")
-# engine.execute("""CREATE TABLE IF NOT EXISTS test (
-#   id serial,
-#   name text
-# );""")
-# engine.execute("""DROP TABLE IF EXISTS company;""")
-# engine.execute("""CREATE TABLE IF NOT EXISTS company (
-#   company_name text,
-#   company_website text
-# );""")
-# engine.execute("""INSERT INTO test(name) VALUES ('grace hopper'), ('alan turing'), ('ada lovelace');""")
-# engine.execute("""INSERT INTO company(company_name) VALUES ('KyotoAnimation'), ('Pierrot'), ('Sunrise');""")
-# engine.execute("""INSERT INTO company(company_website) VALUES ('www.kyotoanimation.co.jp/'), ('http://en.pierrot.jp/'), ('http://www.sunrise-inc.co.jp/international/');""")
-# engine.execute("""INSERT INTO company(company_name,company_website) VALUES ('KyotoAnimation','http://www.kyotoanimation.co.jp/'),('Pierrot','http://en.pierrot.jp/'),('Sunrise','http://www.sunrise-inc.co.jp/international/');""")
-
-#
-# END SQLITE SETUP CODE
-#
-
 
 @app.before_request
 def before_request():
@@ -194,113 +172,15 @@ def index():
 # notice that the functio name is another() rather than index()
 # the functions for each app.route needs to have different names
 #
-@app.route('/another')
-def another():
-  cursor = g.conn.execute("SELECT * FROM Cartoonists")
-  names = []
-  for result in cursor:
-    names.append(result['Cartoonist_Name'])  # can also be accessed using result[0]
-  cursor.close()
-  context = dict(data = names)
-  return render_template("anotherfile.html", **context)
-
-
 # Example of adding new data to the database
 # @app.route('/add', methods=['POST'])
 # def add():
 #   name = request.form['name']
 #   g.conn.execute('INSERT INTO test VALUES (NULL, ?)', name)
 #   return redirect('/')
-"""
-Added cartoonist_a
-"""
-@app.route('/cartoonist_a')
-def cartoonist_a():
-  cursor = g.conn.execute("SELECT Cartoonist_Name FROM Cartoonists WHERE Cartoonist_Name = 'Masashi Kishimoto'")
-  names = []
-  for result in cursor:
-    names.append(result['Cartoonist_Name'])  # can also be accessed using result[0]
-  cursor.close()
-  context = dict(data = names)
-  return render_template("cartoonist_a.html", **context)
-"""
-Added companyindex
-"""
-@app.route('/companyindex')
-def companyindex():
-  cursor = g.conn.execute("SELECT * FROM Company")
-  companies = []
-  for result in cursor:
-    companies.append(result)  # can also be accessed using result[0]
-  cursor.close()
-  context = dict(comp = companies)
-  return render_template("companyindex.html", **context)
-  
-"""
-Added Search
-"""
-
-@app.route('/search')
-def search():
-   temp = []
-   info = []
-   cursor = g.conn.execute("""SELECT * FROM Company WHERE Company_Name = %s;""",(compname,))
-   if cursor is None:
-    context = 'The company is not in the database'
-   else:
-        # rec = cursor.fetchall()
-   #global website
-     for row in cursor: #rec:
-  #     for x in range(0,5):
-        temp.append(row)
-   cursor.close()
-   context = dict(info = temp) 
-   # updateSearched()
-   return render_template('search.html', **context)
 
 
-# """
-# Added search, 404
-# """
-# @app.route('/searchs', methods=['GET', 'POST'])
-# def search():
-#    try:
-#        input = request.form['search']
-#        input = '%' + input + '%'
-       
-   
-#        # cursor = g.conn.execute(text('SELECT name FROM test WHERE name LIKE :inpt'), inpt = input)
-#        cursor = g.conn.execute(text('SELECT name FROM test WHERE name LIKE :inpt'), inpt = input)
 
-#        list = []
-#        for result in cursor:
-#            list.append(result)
-#        cursor.close()
-
-#        context = dict(input = input, name = list)
-#    except:
-#        import traceback; traceback.print_exc()
-#    print request.args
-#    return render_template("search.html", **context)
-
-
-# """
-# By Company
-# """
-# @app.route('/compsearch')
-# def compsearch():
-#   try: 
-#     cursor = g.conn.execute("SELECT Company_Name FROM Company")
-#   except Exception, e:
-#     pass  
-#   comp_names = []
-#   for result in cursor:
-#     comp_names.append(result[0])  # can also be accessed using result[0]
-#   cursor.close()
-#   context = dict(animation = comp_names)
-#   return render_template("compsearch.html", **context)
-  
-""""""
 """
 By Company
 """
@@ -314,25 +194,43 @@ def compsearch():
   for result in cursor:
     comp_names.append(result[0])  # can also be accessed using result[0]
   cursor.close()
+  context = dict(animation = comp_names)
+  return render_template("compsearch.html", **context)
 
-  if request.method == 'POST':
-    query_comp_name = request.form['comp_name']
-    if query_comp_name not in comp_names:
-      error = "Invalid company name."
-    else:
-      rec = g.conn.execute("SELECT * FROM Company WHERE Company_Name = %s",(query_comp_name,))
+  
+""""""
+# """
+# By Company
+# """
+# @app.route('/compsearch')
+# def compsearch():
+#   try: 
+#     cursor = g.conn.execute("SELECT Company_Name FROM Company")
+#   except Exception, e:
+#     pass  
+#   comp_names = []
+#   for result in cursor:
+#     comp_names.append(result[0])  # can also be accessed using result[0]
+#   cursor.close()
+
+#   if request.method == 'POST':
+#     query_comp_name = request.form['comp_name']
+#     if query_comp_name not in comp_names:
+#       error = "Invalid company name."
+#     else:
+#       rec = g.conn.execute("SELECT * FROM Company WHERE Company_Name = %s",(query_comp_name,))
       
-      for res in rec:
-        compNam=res['company_name']
-        compWeb = res['company_website']
-        compCou = res['company_country']
-        compDesc = res['company_description']
-        # aniDate = res['released_date']
-        # aniComp = res['company_name']
-        # aniCid = res['comic_id']
-      return render_template("company.html", compNam = compNam, compWeb = compWeb, compCou = compCou,
-       compDesc = compDesc) #, aniEpi = aniEpi,  aniComp = aniComp, cid = aniCid)
-  return render_template("compsearch.html", comp_names = comp_names, error=error)
+#       for res in rec:
+#         compNam=res['company_name']
+#         compWeb = res['company_website']
+#         compCou = res['company_country']
+#         compDesc = res['company_description']
+#         # aniDate = res['released_date']
+#         # aniComp = res['company_name']
+#         # aniCid = res['comic_id']
+#       return render_template("company.html", compNam = compNam, compWeb = compWeb, compCou = compCou,
+#        compDesc = compDesc) #, aniEpi = aniEpi,  aniComp = aniComp, cid = aniCid)
+#   return render_template("compsearch.html", comp_names = comp_names, error=error)
   
   
   
