@@ -4,17 +4,38 @@ Company you are looking for...
 {% endblock %}
 
 {% block content %}
-<p>Company Name: <div>{{compName}}</div></p>
-<p>Company Website: <div>{{compWeb}}</div></p>
-<p>Country <div>{{compCou}}</div></p>
-<p>Company Description: <div>{{compDesc}}</div></p>
-<p>Productions 
-<div>
-  {% for ani in compAni %}
-  <div>{{ani}}</div>
-  {% endfor %}
-</div>
-</p>
+<h3>{{compName}}</h3>
+<table>
+  <th>Detailed Info of {{compName}}</th>
+  <th></th>
+  <th></th>
+  <th></th>
+  <tr>
+    <td>Company Website</td>
+    <td>{{compWeb}}</td></p>
+    <td>Country</td>
+    <td>{{compCou}}</td>
+  </tr>
+  <tr>
+    <th>Company Descriptio</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+    <td>{{compDesc}}</td>
+  </tr>
+<!--<p>Company Description: <div>{{compDesc}}</div></p>-->
+<!--<p>Productions -->
+<!--<div>-->
+<!--  {% for ani in compAni %}-->
+<!--  <div>{{ani}}</div>-->
+<!--  {% endfor %}-->
+<!--</div>-->
+<!--</p>-->
+  
+</table>
+
 <!-- <p>Total seasons: <div>{{aniSeason}}</div></p>
 <p>Total episodes: <div>{{aniEpi}}</div></p>
 <p>Production Company: <div>{{aniComp}}</div></p>
