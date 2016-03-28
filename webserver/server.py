@@ -292,10 +292,10 @@ def comics(comID):
     comNam = res['comic_name']
     comDesc = res['comic_description']
     comIss = res['issn']
-    carNam = res['Cartoonist_Name']
-    carBir = res['Date_of_Birth']
-    carSex = res['Cartoonist_Gender']
-    carDesc = res['Cartoonist_Description']
+    carNam = res['cartoonist_name']
+    carBir = res['date_of_birth']
+    carSex = res['cartoonist_gender']
+    carDesc = res['cartoonist_description']
   return render_template("comics.html",comID=comID,comDesc=comDesc,comIss=comIss,comNam=comNam,carNam=carNam,carBir=carBir,carSex=carSex,carDesc=carDesc)
 
 
