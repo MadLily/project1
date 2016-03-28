@@ -9,10 +9,11 @@ Search By Comic Name
     <h4><div>{{com}}</div></h4>
     {% endfor %}
 <!-- <form method="POST" action="/animation"> -->
-<form method ="POST" action="/comisearch">
+<!--<form method ="POST" action="/comisearch">-->
 <p>See the details of an animation, type the name of company here:</p>
 <!--MUST CHANGE NAME! -->
 <p> <input type="text" name="comic_name"> <input type="submit" value="query"></p>
+</form>
 {% if error %}
 <p class="error"><strong>Error:</strong> {{ error }}
 {% endif %}
