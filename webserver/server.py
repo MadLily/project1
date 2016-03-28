@@ -316,7 +316,7 @@ By Comic Name
 #   return render_template("comisearch.html", **context)
 
 
-@app.route('/comisearch')
+@app.route('/comisearch', methods=['GET','POST'])
 def comisearch():
   try: 
     cursor = g.conn.execute("SELECT Comic_Name FROM Comic_Draw_Publish")
