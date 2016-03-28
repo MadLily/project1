@@ -6,21 +6,17 @@ Company you are looking for...
 {% block content %}
 <h3>{{compName}}</h3>
 <table>
-  <th>Detailed Info of {{compName}}</th>
-  <th></th>
-  <th></th>
-  <th></th>
+  <th colspan="4">Detailed Info of {{compName}}</th>
   <tr>
-    <td>Company Website</td>
-    <td>{{compWeb}}</td></p>
+    <td colspan ="3">Company Website</td>
     <td>Country</td>
+  </tr>
+  <tr>
+    <td colspan ="3">{{compWeb}}</td>
     <td>{{compCou}}</td>
   </tr>
   <tr>
-    <th>Company Descriptio</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th colspan ="4">Company Descriptiom</th>
   </tr>
   <tr>
     <td>{{compDesc}}</td>
