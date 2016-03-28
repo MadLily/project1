@@ -459,7 +459,7 @@ def language(langNam):
   aniName = []
   for res in rec:
     aniName.append(res['atitle'])
-  return render_template("language.html",aniName=aniName)
+  return render_template("language.html",aniName=aniName,langNam=langNam)
 
 
 
