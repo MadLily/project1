@@ -217,7 +217,7 @@ def compsearch():
     if query_comp_name not in comp_names:
       error = "The company your searched for is not in the database"
     else:
-      rec = g.conn.execute("SELECT Company_Name FROM Company WHERE Company_Name = %s",(query_comi_name,))
+      rec = g.conn.execute("SELECT Company_Name FROM Company WHERE Company_Name = %s",(query_comp_name,))
       # rec = g.conn.execute("SELECT * FROM Comic_Draw_Publish c, Magazine m, Cartoonists d WHERE c.Comic_Name = %s,(query_comi_name,) AND c.Cartoonist_ID = d.Cartoonist_ID AND c.ISSN = m.ISSN")
       for res in rec:
         compNam=res['company_name']
